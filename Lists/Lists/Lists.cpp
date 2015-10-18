@@ -60,13 +60,26 @@ void listInit ( Node ** begin)
 }
 
 
+void addBegin (Node ** begin, const Data& intel )
+{
+    Node * temporary = new Node;
+    temporary->datum = intel;
+    temporary->next = (*begin);
+    (*begin) = temporary;
+}
+
+
 int main( int argc, char* argv[])
 {
    // ptr begin on 0
     Node* begin = NULL;
 
-   // list initiation function
+    Data intel  = {-12};
+
+    // list initiation function
     listInit(&begin);
+
+    addBegin(&begin,intel);
 
    // screen out function
     printFunc(begin);
