@@ -26,18 +26,30 @@ struct Node
     Node* next;
 };
 
-int main( int argc, char* argv[])
+
+void printFunc (Node* ptr)
 {
-    srand(time(NULL));
-    Node* begin = NULL;
-    begin = new Node;
+    Node * print = ptr;
 
-    begin->datum.key = 35;
-    begin->next = NULL;
+    while(print)
+    {
+        cout << "\t" << print->datum.key << "->";
+       // move on next element
+        print = print->next;
+    }
+    cout << "Null\n";
+}
 
-    Data massdata[5] = {1,2,3,4,5};
+void listInit ( Node ** begin)
+{
+    *begin = new Node;
 
-    Node *end = begin;
+    (*begin)->datum.key = 0;
+    (*begin)->next = NULL;
+
+    Data massdata[5] = {13,254,376,444,504};
+
+    Node *end = *begin;
     for (int i(0); i < 5 ; i++ )
     {
         end->next = new Node;
@@ -45,8 +57,19 @@ int main( int argc, char* argv[])
         end->datum = massdata[i];
         end->next = NULL;
     }
+}
 
 
+int main( int argc, char* argv[])
+{
+   // ptr begin on 0
+    Node* begin = NULL;
+
+   // list initiation function
+    listInit(&begin);
+
+   // screen out function
+    printFunc(begin);
 
 
     system("pause");
