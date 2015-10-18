@@ -69,17 +69,61 @@ void addBegin (Node ** begin, const Data& intel )
 }
 
 
+void insert (Node ** begin, const Data& intel )
+{
+    Node * ins = new Node;
+    ins->datum = intel;
+
+    if(!(*begin))
+    {
+        ins->next = NULL;
+        (*begin) = ins;
+        return;
+    }
+
+    Node * run = *begin;
+    // insert in begin
+    if (run->datum.key >= ins->datum.key)
+    {
+        ins->next = run;
+        *begin = ins;
+        return;
+    }
+
+    Node * runover = run->next;
+
+    while (runover)
+    {
+        if(run->datum.key < ins->datum.key && runover->datum.key < ins->datum.key)
+        {
+            run->next = ins;
+            ins->next = runover;
+            return;
+        }
+        run = runover;
+        runover = runover->next;
+
+    }
+
+    run->next = ins;
+    ins->next = NULL;
+
+}
+
+
 int main( int argc, char* argv[])
 {
    // ptr begin on 0
     Node* begin = NULL;
 
-    Data intel  = {-12};
+    Data intel  = {80};
 
     // list initiation function
     listInit(&begin);
-
-    addBegin(&begin,intel);
+ // screen out function
+    printFunc(begin);
+//    addBegin(&begin,intel);
+    insert(&begin,intel);
 
    // screen out function
     printFunc(begin);
